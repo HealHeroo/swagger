@@ -1,2 +1,2 @@
 # swagger
-This is Swagger of HealHero
+https://healheroo.github.io/swagger/
