@@ -372,7 +372,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Order"
         "404":
-          description: Mentor not found
+          description: Order not found
       security:
         - token:
             - write:apiKey
