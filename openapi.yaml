@@ -492,77 +492,52 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Driver"
-    Pembimbing:
+    Obat:
       type: object
       properties:
         id:
           type: string
           example: 1
-        name:
+        nama_obat:
           type: string
-          example: Pembimbing Name
-        email:
+          example: Paracetamol
+        jenis_obat:
           type: string
-          example: pembimbing@example.com
-    PembimbingArray:
-      description: List of Pembimbing objects
+          example: Analgesik
+        keterangan:
+          type: string
+          example: 500 Mg
+        harga:
+          type: string
+          example: Rp 8.000
+    ObatArray:
+      description: List of Obat objects
       type: array
       items:
-        $ref: "#/components/schemas/Pembimbing"
-    Mentor:
+        $ref: "#/components/schemas/Obat"
+    Order:
       type: object
       properties:
         id:
           type: string
           example: 1
-        name:
+        namobat:
           type: string
-          example: Mentor Name
-        email:
-          type: string
-          example: mentor@example.com
-    MentorArray:
-      description: List of Mentor objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Mentor"
-    Magang:
-      type: object
-      properties:
-        id:
+          example: Paracetamol
+        quantity:
           type: string
           example: 1
-        name:
+        total_cost:
           type: string
-          example: Magang Name
-        duration:
+          example: Rp 8.000
+        status:
           type: string
-          example: 3 months
-        location:
-          type: string
-          example: Magang Location
-    MagangArray:
-      description: List of Magang objects
+          example: Diantar
+    OrderArray:
+      description: List of Order objects
       type: array
       items:
-        $ref: "#/components/schemas/Magang"
-    MahasiswaMagang:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        mahasiswaId:
-          type: string
-          example: 123456
-        magangId:
-          type: string
-          example: 789012
-    MahasiswaMagangArray:
-      description: List of Mahasiswa Magang objects
-      type: array
-      items:
-        $ref: "#/components/schemas/MahasiswaMagang"
+        $ref: "#/components/schemas/Order"
   requestBodies:
     AuthReq:
       description: Request Authentication
