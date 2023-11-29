@@ -144,56 +144,56 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mitra/{mitraId}:
+  /driver/{driverId}:
     get:
       tags:
-        - Mitra
-      summary: Get Mitra by ID
-      description: Get a Mitra by its ID
-      operationId: getMitraById
+        - Driver
+      summary: Get Driver by ID
+      description: Get a Driver by its ID
+      operationId: getDriverById
       parameters:
-        - name: mitraId
+        - name: driverId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mitra
+          description: ID of the Driver
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mitra"
+                $ref: "#/components/schemas/Driver"
         "404":
-          description: Mitra not found
+          description: Driver not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
     put:
       tags:
-        - Mitra
-      summary: Update Mitra
-      description: Update an existing Mitra
-      operationId: updateMitra
+        - Driver
+      summary: Update Driver
+      description: Update an existing Driver
+      operationId: updateDriver
       parameters:
-        - name: mitraId
+        - name: driverId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mitra
+          description: ID of the Driver
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mitra"
+              $ref: "#/components/schemas/Driver"
       responses:
         "200":
-          description: Mitra updated successfully
+          description: Driver updated successfully
         "404":
-          description: Mitra not found
+          description: Driver not found
       security:
         - token:
             - write:apiKey
