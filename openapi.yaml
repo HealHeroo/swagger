@@ -16,16 +16,16 @@ externalDocs:
 servers:
   - url: https://asia-southeast2-peak-equator-402307.cloudfunctions.net
 tags:
-  - name: User
-    description: Data User
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://github.com/HealHeroo/gcf_healhero/tree/main/user
   - name: Auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/HealHeroo/gcf_healhero/tree/main/login
+  - name: User
+    description: Data User
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/user
   - name: Pengguna
     description: Pengguna to Access to API
     externalDocs:
@@ -47,24 +47,6 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://github.com/HealHeroo/gcf_healhero/tree/main/order
 paths:
-  /user:
-    get:
-      tags:
-        - User
-      summary: Get All User
-      description: List Data User
-      operationId: getUserJSON
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid status value
   /login:
     post:
       tags:
@@ -86,230 +68,7 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-components:
-  schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: string
-          example: asdasdasdasd
-        email:
-          type: string
-          example: admin@gmail.com
-        role:
-          type: string
-          example: admin
-    Login:
-      type: object
-      properties:
-        email:
-          type: string
-          example: yourmail@gmail.com
-        password:
-          type: string
-          example: secret
-    Pengguna:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: John Doe
-        studentId:
-          type: string
-          example: 123456
-        email:
-          type: string
-          example: john@example.com
-    PenggunaArray:
-      description: List of Pengguna objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Pengguna"
-    AuthResponse:
-      type: object
-      properties:
-        status:
-          type: bool
-          example: true
-        message:
-          type: string
-          example: message
-        token:
-          type: string
-          example: token
-    Driver:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: Driver Name
-        address:
-          type: string
-          example: Driver Address
-        contact:
-          type: string
-          example: contact@example.com
-    DriverArray:
-      description: List of Driver objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Driver"
-    Obat:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: Obat Name
-        duration:
-          type: string
-          example: 3 months
-        location:
-          type: string
-          example: Obat Location
-    ObatArray:
-      description: List of Obat objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Obat"
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: Order Name
-        email:
-          type: string
-          example: Order@example.com
-    OrderArray:
-      description: List of Order objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Order"
-  requestBodies:
-    AuthReq:
-      description: Request Authentication
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Login"
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/AuthResponse"
-  securitySchemes:
-    token:
-      type: apiKey
-      name: Authorization
-      in: header
-
-
-openapi: 3.0.3
-info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
-  description: >-
-    Dokumen API Cloud Function Aplikasi Kesehatan HealHero
-  termsOfService: https://github.com/HealHeroo/swagger
-  contact:
-    email: juwitastefany13@gmail.com
-  license:
-    name: HealHero Package
-    url: https://pkg.go.dev/github.com/HealHeroo/be_healhero
-  version: 1.0.11
-externalDocs:
-  description: Repo GCF
-  url: https://github.com/HealHeroo/gcf_healhero
-servers:
-  - url: https://asia-southeast2-peak-equator-402307.cloudfunctions.net
-tags:
-  - name: Auth
-    description: Auth to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://github.com/HealHeroo/gcf_healhero/tree/main/login
-  - name: User
-    description: Data User
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://github.com/HealHeroo/gcf_healhero/tree/main/user
-  - name: Pengguna
-    description: Pengguna to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mahasiswa/
-  - name: Mitra
-    description: Mitra to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mitra/
-  - name: Pembimbing
-    description: Pembimbing to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/pembimbing/
-  - name: Mentor
-    description: Mentor to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mentor/
-  - name: Magang
-    description: Magang to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/magang/
-  - name: Mahasiswa Magang
-    description: Mahasiswa Magang to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mahasiswamagang/
-  - name: Report
-    description: Report to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/report/
-paths:
-  /intermoni-login:
-    post:
-      tags:
-        - Auth
-      summary: Login get Token
-      description: Login and Get User Token
-      operationId: authService
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Login"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AuthResponse"
-        "405":
-          description: Invalid input
-  /intermoni-user:
+  /user:
     get:
       tags:
         - User
@@ -331,56 +90,56 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mahasiswa/{mahasiswaId}:
+  /pengguna/{penggunaId}:
     get:
       tags:
-        - Mahasiswa
-      summary: Get Mahasiswa by ID
-      description: Get a Mahasiswa by its ID
-      operationId: getMahasiswaById
+        - Pengguna
+      summary: Get Pengguna by ID
+      description: Get a Pengguna by its ID
+      operationId: getPenggunaById
       parameters:
-        - name: mahasiswaId
+        - name: penggunaId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa
+          description: ID of the Pengguna
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mahasiswa"
+                $ref: "#/components/schemas/Pengguna"
         "404":
-          description: Mahasiswa not found
+          description: Pengguna not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
     put:
       tags:
-        - Mahasiswa
-      summary: Update Mahasiswa
-      description: Update an existing Mahasiswa
-      operationId: updateMahasiswa
+        - Pengguna
+      summary: Update Pengguna
+      description: Update an existing Pengguna
+      operationId: updatePengguna
       parameters:
-        - name: mahasiswaId
+        - name: penggunaId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa
+          description: ID of the Pengguna
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mahasiswa"
+              $ref: "#/components/schemas/Pengguna"
       responses:
         "200":
-          description: Mahasiswa updated successfully
+          description: Pengguna updated successfully
         "404":
-          description: Mahasiswa not found
+          description: Pengguna not found
       security:
         - token:
             - write:apiKey
