@@ -222,3 +222,891 @@ components:
       type: apiKey
       name: Authorization
       in: header
+
+
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: >-
+    Dokumen API Cloud Function Aplikasi Kesehatan HealHero
+  termsOfService: https://github.com/HealHeroo/swagger
+  contact:
+    email: juwitastefany13@gmail.com
+  license:
+    name: HealHero Package
+    url: https://pkg.go.dev/github.com/HealHeroo/be_healhero
+  version: 1.0.11
+externalDocs:
+  description: Repo GCF
+  url: https://github.com/HealHeroo/gcf_healhero
+servers:
+  - url: https://asia-southeast2-peak-equator-402307.cloudfunctions.net
+tags:
+  - name: Auth
+    description: Auth to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/login
+  - name: User
+    description: Data User
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/user
+  - name: Pengguna
+    description: Pengguna to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/mahasiswa/
+  - name: Mitra
+    description: Mitra to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/mitra/
+  - name: Pembimbing
+    description: Pembimbing to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/pembimbing/
+  - name: Mentor
+    description: Mentor to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/mentor/
+  - name: Magang
+    description: Magang to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/magang/
+  - name: Mahasiswa Magang
+    description: Mahasiswa Magang to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/mahasiswamagang/
+  - name: Report
+    description: Report to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/report/
+paths:
+  /intermoni-login:
+    post:
+      tags:
+        - Auth
+      summary: Login get Token
+      description: Login and Get User Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "405":
+          description: Invalid input
+  /intermoni-user:
+    get:
+      tags:
+        - User
+      summary: Get All User
+      description: List Data User
+      operationId: getUserJSON
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid status value
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mahasiswa/{mahasiswaId}:
+    get:
+      tags:
+        - Mahasiswa
+      summary: Get Mahasiswa by ID
+      description: Get a Mahasiswa by its ID
+      operationId: getMahasiswaById
+      parameters:
+        - name: mahasiswaId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mahasiswa"
+        "404":
+          description: Mahasiswa not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mahasiswa
+      summary: Update Mahasiswa
+      description: Update an existing Mahasiswa
+      operationId: updateMahasiswa
+      parameters:
+        - name: mahasiswaId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mahasiswa"
+      responses:
+        "200":
+          description: Mahasiswa updated successfully
+        "404":
+          description: Mahasiswa not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mitra/{mitraId}:
+    get:
+      tags:
+        - Mitra
+      summary: Get Mitra by ID
+      description: Get a Mitra by its ID
+      operationId: getMitraById
+      parameters:
+        - name: mitraId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mitra
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mitra"
+        "404":
+          description: Mitra not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mitra
+      summary: Update Mitra
+      description: Update an existing Mitra
+      operationId: updateMitra
+      parameters:
+        - name: mitraId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mitra
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mitra"
+      responses:
+        "200":
+          description: Mitra updated successfully
+        "404":
+          description: Mitra not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-pembimbing:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get All Pembimbing
+      description: List Data Pembimbing
+      operationId: getAllPembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PembimbingArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Pembimbing
+      summary: Create Pembimbing
+      description: Create a new Pembimbing
+      operationId: createPembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "201":
+          description: Pembimbing created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /intermoni-pembimbing/{pembimbingId}:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get Pembimbing by ID
+      description: Get a Pembimbing by its ID
+      operationId: getPembimbingById
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pembimbing"
+        "404":
+          description: Pembimbing not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Pembimbing
+      summary: Update Pembimbing
+      description: Update an existing Pembimbing
+      operationId: updatePembimbing
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "200":
+          description: Pembimbing updated successfully
+        "404":
+          description: Pembimbing not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mentor:
+    get:
+      tags:
+        - Mentor
+      summary: Get All Mentors
+      description: List Data Mentors
+      operationId: getAllMentors
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentorArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Mentor
+      summary: Create Mentor
+      description: Create a new Mentor
+      operationId: createMentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "201":
+          description: Mentor created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mentor/{mentorId}:
+    get:
+      tags:
+        - Mentor
+      summary: Get Mentor by ID
+      description: Get a Mentor by its ID
+      operationId: getMentorById
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mentor"
+        "404":
+          description: Mentor not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mentor
+      summary: Update Mentor
+      description: Update an existing Mentor
+      operationId: updateMentor
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "200":
+          description: Mentor updated successfully
+        "404":
+          description: Mentor not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-magang:
+    get:
+      tags:
+        - Magang
+      summary: Get All Magang
+      description: List Data Magang
+      operationId: getAllMagang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MagangArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Magang
+      summary: Create Magang
+      description: Create a new Magang
+      operationId: createMagang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Magang"
+      responses:
+        "201":
+          description: Magang created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-magang/{magangId}:
+    get:
+      tags:
+        - Magang
+      summary: Get Magang by ID
+      description: Get a Magang by its ID
+      operationId: getMagangById
+      parameters:
+        - name: magangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Magang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Magang"
+        "404":
+          description: Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Magang
+      summary: Update Magang
+      description: Update an existing Magang
+      operationId: updateMagang
+      parameters:
+        - name: magangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Magang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Magang"
+      responses:
+        "200":
+          description: Magang updated successfully
+        "404":
+          description: Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mahasiswa-magang:
+    get:
+      tags:
+        - Mahasiswa Magang
+      summary: Get All Mahasiswa Magang
+      description: List Data Mahasiswa Magang
+      operationId: getAllMahasiswaMagang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MahasiswaMagangArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Mahasiswa Magang
+      summary: Create Mahasiswa Magang
+      description: Create a new Mahasiswa Magang
+      operationId: createMahasiswaMagang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MahasiswaMagang"
+      responses:
+        "201":
+          description: Mahasiswa Magang created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mahasiswa-magang/{mahasiswaMagangId}:
+    get:
+      tags:
+        - Mahasiswa Magang
+      summary: Get Mahasiswa Magang by ID
+      description: Get a Mahasiswa Magang by its ID
+      operationId: getMahasiswaMagangById
+      parameters:
+        - name: mahasiswaMagangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa Magang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MahasiswaMagang"
+        "404":
+          description: Mahasiswa Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mahasiswa Magang
+      summary: Update Mahasiswa Magang
+      description: Update an existing Mahasiswa Magang
+      operationId: updateMahasiswaMagang
+      parameters:
+        - name: mahasiswaMagangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa Magang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MahasiswaMagang"
+      responses:
+        "200":
+          description: Mahasiswa Magang updated successfully
+        "404":
+          description: Mahasiswa Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Mahasiswa Magang
+      summary: Delete Mahasiswa Magang
+      description: Delete a Mahasiswa Magang by its ID
+      operationId: deleteMahasiswaMagang
+      parameters:
+        - name: mahasiswaMagangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa Magang
+      responses:
+        "204":
+          description: Mahasiswa Magang deleted successfully
+        "404":
+          description: Mahasiswa Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-report:
+    get:
+      tags:
+        - Report
+      summary: Get All Reports
+      description: List Data Reports
+      operationId: getAllReports
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Report
+      summary: Create Report
+      description: Create a new Report
+      operationId: createReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+      responses:
+        "201":
+          description: Report created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-report/{reportId}:
+    get:
+      tags:
+        - Report
+      summary: Get Report by ID
+      description: Get a Report by its ID
+      operationId: getReportById
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+        "404":
+          description: Report not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Report
+      summary: Update Report
+      description: Update an existing Report
+      operationId: updateReport
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+      responses:
+        "200":
+          description: Report updated successfully
+        "404":
+          description: Report not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Report
+      summary: Delete Report
+      description: Delete a Report by its ID
+      operationId: deleteReport
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      responses:
+        "204":
+          description: Report deleted successfully
+        "404":
+          description: Report not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: yourmail@gmail.com
+        password:
+          type: string
+          example: secret
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: asdasdasdasd
+        email:
+          type: string
+          example: admin@gmail.com
+        role:
+          type: string
+          example: admin
+    Mahasiswa:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        studentId:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: john@example.com
+    MahasiswaArray:
+      description: List of Mahasiswa objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mahasiswa"
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: message
+        token:
+          type: string
+          example: token
+    Mitra:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Mitra Name
+        address:
+          type: string
+          example: Mitra Address
+        contact:
+          type: string
+          example: contact@example.com
+    MitraArray:
+      description: List of Mitra objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mitra"
+    Pembimbing:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Pembimbing Name
+        email:
+          type: string
+          example: pembimbing@example.com
+    PembimbingArray:
+      description: List of Pembimbing objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Pembimbing"
+    Mentor:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Mentor Name
+        email:
+          type: string
+          example: mentor@example.com
+    MentorArray:
+      description: List of Mentor objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mentor"
+    Magang:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Magang Name
+        duration:
+          type: string
+          example: 3 months
+        location:
+          type: string
+          example: Magang Location
+    MagangArray:
+      description: List of Magang objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Magang"
+    MahasiswaMagang:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        mahasiswaId:
+          type: string
+          example: 123456
+        magangId:
+          type: string
+          example: 789012
+    MahasiswaMagangArray:
+      description: List of Mahasiswa Magang objects
+      type: array
+      items:
+        $ref: "#/components/schemas/MahasiswaMagang"
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Login"
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AuthResponse"
+  securitySchemes:
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
