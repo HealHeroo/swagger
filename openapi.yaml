@@ -415,33 +415,45 @@ components:
       properties:
         _id:
           type: string
-          example: asdasdasdasd
+          example: 018272631
         email:
           type: string
           example: admin@gmail.com
         role:
           type: string
           example: admin
-    Mahasiswa:
+    Pengguna:
       type: object
       properties:
         id:
           type: string
           example: 1
-        name:
+        namalengkap:
           type: string
-          example: John Doe
-        studentId:
+          example: Lisa Pink
+        tanggallahir:
+          type: string
+          example: 2023-11-07
+        jeniskelamin:
+          type: string
+          example: Perempuan
+        nomorhp:
+          type: string
+          example: 081274829374
+        alamat:
+          type: string
+          example: Jl. Mangga No 54
+        usersId:
           type: string
           example: 123456
         email:
           type: string
-          example: john@example.com
-    MahasiswaArray:
-      description: List of Mahasiswa objects
+          example: lisapink@gmail.com
+    PenggunaArray:
+      description: List of Pengguna objects
       type: array
       items:
-        $ref: "#/components/schemas/Mahasiswa"
+        $ref: "#/components/schemas/Pengguna"
     AuthResponse:
       type: object
       properties:
@@ -454,26 +466,32 @@ components:
         token:
           type: string
           example: token
-    Mitra:
+    Driver:
       type: object
       properties:
         id:
           type: string
           example: 1
-        name:
+        namalengkap:
           type: string
-          example: Mitra Name
-        address:
+          example: Ade Candra Setiadi
+        jeniskelamin:
           type: string
-          example: Mitra Address
-        contact:
+          example: Laki Laki
+        nomorhp:
           type: string
-          example: contact@example.com
-    MitraArray:
-      description: List of Mitra objects
+          example: 081274836472
+        alamat:
+          type: string
+          example: Jl. Mawar No 56
+        platmotor:
+          type: string
+          example: D 1467 MOD
+    DriverArray:
+      description: List of Driver objects
       type: array
       items:
-        $ref: "#/components/schemas/Mitra"
+        $ref: "#/components/schemas/Driver"
     Pembimbing:
       type: object
       properties:
