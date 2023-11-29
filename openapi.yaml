@@ -198,40 +198,89 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-pembimbing:
+  /obat:
     get:
       tags:
-        - Pembimbing
-      summary: Get All Pembimbing
-      description: List Data Pembimbing
-      operationId: getAllPembimbing
+        - Obat
+      summary: Get All Obat
+      description: List Data Obat
+      operationId: getAllObat
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PembimbingArray"
+                $ref: "#/components/schemas/ObatArray"
       security:
         - token:
             - write:apiKey
             - read:apiKey
     post:
       tags:
-        - Pembimbing
-      summary: Create Pembimbing
-      description: Create a new Pembimbing
-      operationId: createPembimbing
+        - Obat
+      summary: Create Obat
+      description: Create a new Obat
+      operationId: creatObat
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Pembimbing"
+              $ref: "#/components/schemas/Obat"
       responses:
         "201":
-          description: Pembimbing created successfully
+          description: Obat created successfully
         "400":
           description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Obat
+      summary: Update Obat
+      description: Update an existing Obat
+      operationId: updateobat
+      parameters:
+        - name: obatId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Obat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Obat"
+      responses:
+        "200":
+          description: Obat updated successfully
+        "404":
+          description: Obat not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Obat
+      summary: Delete Obat
+      description: Delete a Obat by its ID
+      operationId: deleteObat
+      parameters:
+        - name: obatId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Obat
+      responses:
+        "204":
+          description: Obat deleted successfully
+        "404":
+          description: Obat not found
       security:
         - token:
             - write:apiKey
