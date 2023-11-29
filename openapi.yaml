@@ -312,414 +312,89 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mentor:
+  /order:
     get:
       tags:
-        - Mentor
-      summary: Get All Mentors
-      description: List Data Mentors
-      operationId: getAllMentors
+        - Order
+      summary: Get All Order
+      description: List Data Order
+      operationId: getAllOrder
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MentorArray"
+                $ref: "#/components/schemas/OrderArray"
       security:
         - token:
             - write:apiKey
             - read:apiKey
     post:
       tags:
-        - Mentor
-      summary: Create Mentor
-      description: Create a new Mentor
-      operationId: createMentor
+        - Order
+      summary: Create Order
+      description: Create a new Order
+      operationId: createOrder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mentor"
+              $ref: "#/components/schemas/Order"
       responses:
         "201":
-          description: Mentor created successfully
+          description: Order created successfully
         "400":
           description: Invalid input
       security:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mentor/{mentorId}:
+  /order/{orderId}:
     get:
       tags:
-        - Mentor
-      summary: Get Mentor by ID
-      description: Get a Mentor by its ID
-      operationId: getMentorById
+        - Order
+      summary: Get Order by ID
+      description: Get a Order by its ID
+      operationId: getOrderById
       parameters:
-        - name: mentorId
+        - name: orderId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mentor
+          description: ID of the Order
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mentor"
+                $ref: "#/components/schemas/Order"
         "404":
           description: Mentor not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
-    put:
-      tags:
-        - Mentor
-      summary: Update Mentor
-      description: Update an existing Mentor
-      operationId: updateMentor
-      parameters:
-        - name: mentorId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Mentor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Mentor"
-      responses:
-        "200":
-          description: Mentor updated successfully
-        "404":
-          description: Mentor not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-magang:
-    get:
-      tags:
-        - Magang
-      summary: Get All Magang
-      description: List Data Magang
-      operationId: getAllMagang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MagangArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    post:
-      tags:
-        - Magang
-      summary: Create Magang
-      description: Create a new Magang
-      operationId: createMagang
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Magang"
-      responses:
-        "201":
-          description: Magang created successfully
-        "400":
-          description: Invalid input
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-magang/{magangId}:
-    get:
-      tags:
-        - Magang
-      summary: Get Magang by ID
-      description: Get a Magang by its ID
-      operationId: getMagangById
-      parameters:
-        - name: magangId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Magang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Magang"
-        "404":
-          description: Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    put:
-      tags:
-        - Magang
-      summary: Update Magang
-      description: Update an existing Magang
-      operationId: updateMagang
-      parameters:
-        - name: magangId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Magang
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Magang"
-      responses:
-        "200":
-          description: Magang updated successfully
-        "404":
-          description: Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-mahasiswa-magang:
-    get:
-      tags:
-        - Mahasiswa Magang
-      summary: Get All Mahasiswa Magang
-      description: List Data Mahasiswa Magang
-      operationId: getAllMahasiswaMagang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MahasiswaMagangArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    post:
-      tags:
-        - Mahasiswa Magang
-      summary: Create Mahasiswa Magang
-      description: Create a new Mahasiswa Magang
-      operationId: createMahasiswaMagang
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MahasiswaMagang"
-      responses:
-        "201":
-          description: Mahasiswa Magang created successfully
-        "400":
-          description: Invalid input
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-mahasiswa-magang/{mahasiswaMagangId}:
-    get:
-      tags:
-        - Mahasiswa Magang
-      summary: Get Mahasiswa Magang by ID
-      description: Get a Mahasiswa Magang by its ID
-      operationId: getMahasiswaMagangById
-      parameters:
-        - name: mahasiswaMagangId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Mahasiswa Magang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MahasiswaMagang"
-        "404":
-          description: Mahasiswa Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    put:
-      tags:
-        - Mahasiswa Magang
-      summary: Update Mahasiswa Magang
-      description: Update an existing Mahasiswa Magang
-      operationId: updateMahasiswaMagang
-      parameters:
-        - name: mahasiswaMagangId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Mahasiswa Magang
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MahasiswaMagang"
-      responses:
-        "200":
-          description: Mahasiswa Magang updated successfully
-        "404":
-          description: Mahasiswa Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
     delete:
       tags:
-        - Mahasiswa Magang
-      summary: Delete Mahasiswa Magang
-      description: Delete a Mahasiswa Magang by its ID
-      operationId: deleteMahasiswaMagang
+        - Order
+      summary: Delete Order
+      description: Delete a Order by its ID
+      operationId: deleteOrder
       parameters:
-        - name: mahasiswaMagangId
+        - name: orderId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa Magang
+          description: ID of the Order
       responses:
         "204":
-          description: Mahasiswa Magang deleted successfully
+          description: Order deleted successfully
         "404":
-          description: Mahasiswa Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-report:
-    get:
-      tags:
-        - Report
-      summary: Get All Reports
-      description: List Data Reports
-      operationId: getAllReports
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReportArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    post:
-      tags:
-        - Report
-      summary: Create Report
-      description: Create a new Report
-      operationId: createReport
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Report"
-      responses:
-        "201":
-          description: Report created successfully
-        "400":
-          description: Invalid input
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-report/{reportId}:
-    get:
-      tags:
-        - Report
-      summary: Get Report by ID
-      description: Get a Report by its ID
-      operationId: getReportById
-      parameters:
-        - name: reportId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Report
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Report"
-        "404":
-          description: Report not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    put:
-      tags:
-        - Report
-      summary: Update Report
-      description: Update an existing Report
-      operationId: updateReport
-      parameters:
-        - name: reportId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Report
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Report"
-      responses:
-        "200":
-          description: Report updated successfully
-        "404":
-          description: Report not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    delete:
-      tags:
-        - Report
-      summary: Delete Report
-      description: Delete a Report by its ID
-      operationId: deleteReport
-      parameters:
-        - name: reportId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Report
-      responses:
-        "204":
-          description: Report deleted successfully
-        "404":
-          description: Report not found
+          description: Order not found
       security:
         - token:
             - write:apiKey
