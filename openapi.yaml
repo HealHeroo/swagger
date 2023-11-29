@@ -236,12 +236,39 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /obat/{obatId}:
+    get:
+      tags:
+        - Obat
+      summary: Get Obat by ID
+      description: Get a Obat by its ID
+      operationId: getObatById
+      parameters:
+        - name: obatId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Obat
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Obat"
+        "404":
+          description: Obat not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
     put:
       tags:
         - Obat
       summary: Update Obat
       description: Update an existing Obat
-      operationId: updateobat
+      operationId: updateObat
       parameters:
         - name: obatId
           in: path
@@ -281,61 +308,6 @@ paths:
           description: Obat deleted successfully
         "404":
           description: Obat not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-
-  /intermoni-pembimbing/{pembimbingId}:
-    get:
-      tags:
-        - Pembimbing
-      summary: Get Pembimbing by ID
-      description: Get a Pembimbing by its ID
-      operationId: getPembimbingById
-      parameters:
-        - name: pembimbingId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Pembimbing
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pembimbing"
-        "404":
-          description: Pembimbing not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-    put:
-      tags:
-        - Pembimbing
-      summary: Update Pembimbing
-      description: Update an existing Pembimbing
-      operationId: updatePembimbing
-      parameters:
-        - name: pembimbingId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Pembimbing
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Pembimbing"
-      responses:
-        "200":
-          description: Pembimbing updated successfully
-        "404":
-          description: Pembimbing not found
       security:
         - token:
             - write:apiKey
