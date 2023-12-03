@@ -200,7 +200,7 @@ paths:
         - token:
             - write: apiKey
             - read: apiKey
-    /obat:
+  /obat:
     post:
       tags:
         - Obat
@@ -295,7 +295,7 @@ paths:
         - token:
             - write: apiKey
             - read: apiKey
-    /order:
+  /order:
     post:
       tags:
         - Order
