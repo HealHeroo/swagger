@@ -200,7 +200,7 @@ paths:
         - token:
             - write: apiKey
             - read: apiKey
-  /obat:
+    /obat:
     post:
       tags:
         - Obat
@@ -213,4 +213,357 @@ paths:
             schema:
               $ref: "#/components/schemas/Obat"
       responses:
-       
+        "201":
+          description: Obat created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+    get:
+      tags:
+        - Obat
+      summary: Get Obat by ID
+      description: Get an Obat by its ID
+      operationId: getObatById
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+          description: ID of the Obat
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Obat"
+        "404":
+          description: Obat not found
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+    put:
+      tags:
+        - Obat
+      summary: Update Obat
+      description: Update an existing Obat
+      operationId: updateObat
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of the Obat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Obat"
+      responses:
+        "200":
+          description: Obat updated successfully
+        "404":
+          description: Obat not found
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+    delete:
+      tags:
+        - Obat
+      summary: Delete Obat
+      description: Delete a Obat by its ID
+      operationId: deleteObat
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of the Obat
+      responses:
+        "204":
+          description: Obat deleted successfully
+        "404":
+          description: Obat not found
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+    /order:
+  post:
+    tags:
+      - Order
+    summary: Create Order
+    description: Create a new Order
+    operationId: createOrder
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Order"
+    responses:
+      "201":
+        description: Order created successfully
+      "400":
+        description: Invalid input
+    security:
+      - token:
+          - write:apiKey
+          - read:apiKey
+  get:
+    tags:
+      - Order
+    summary: Get Order by ID
+    description: Get a Order by its ID
+    operationId: getOrderById
+    parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+        description: ID of the Order
+    responses:
+      "200":
+        description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+      "404":
+        description: Order not found
+    security:
+      - token:
+          - write:apiKey
+          - read:apiKey
+  delete:
+    tags:
+      - Order
+    summary: Delete Order
+    description: Delete a Order by its ID
+    operationId: deleteOrder
+    parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of the Order
+    responses:
+      "204":
+        description: Order deleted successfully
+      "404":
+        description: Order not found
+    security:
+      - token:
+          - write:apiKey
+          - read:apiKey
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: yourmail@gmail.com
+        password:
+          type: string
+          example: secret
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: message
+        token:
+          type: string
+          example: token
+        role:
+          type: string
+          example: admin
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 018272631
+        email:
+          type: string
+          example: admin@gmail.com
+        role:
+          type: string
+          example: admin
+    UserData:
+      type: object
+      properties:
+        data:
+          type: object
+        akun:
+          type: object
+          properties:
+            _id:
+              type: string
+              example: 018272631
+            email:
+              type: string
+              example: admin@gmail.com
+            role:
+              type: string
+              example: admin
+    SignupPenggunaRequest:
+      type: object
+      properties:
+        namalengkap:
+          type: string
+          example: Bella Swan
+        tanggallahir:
+          type: string
+          example: "1997-02-07"
+        jeniskelamin:
+          type: string
+          example: Female
+        nomorhp:
+          type: string
+          example: 123456789
+        alamat:
+          type: string
+          example: Jl Melati No.121
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: pengguna@example.com
+            password:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+      required:
+        - namalengkap
+        - tanggallahir
+        - jeniskelamin
+        - nomorhp
+        - alamat
+        - akun
+    SignupDriverRequest:
+      type: object
+      properties:
+        namalengkap:
+          type: string
+          example: Budi Setiawan
+        jeniskelamin:
+          type: string
+          example: Male
+        nomorhp:
+          type: string
+          example: 123456789
+        alamat:
+          type: string
+          example: Jl Perahu No.203
+        platmotor:
+          type: string
+          example: D 1203 TR
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: driver@example.com
+            password:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+      required:
+        - namalengkap
+        - jeniskelamin
+        - nomorhp
+        - alamat
+        - platmotor
+        - akun
+    Pengguna:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        namalengkap:
+          type: string
+          example: Lisa Pink
+        pelangganId:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: bella@example.com
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        namalengkap:
+          type: string
+          example: Driver Name
+        alamat:
+          type: string
+          example: Driver Address
+        email:
+          type: string
+          example: driver@example.com
+    DriverArray:
+      description: List of Driver objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Driver"
+    Obat:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        nama_obat:
+          type: string
+          example: Obat Name
+        keterangan:
+          type: string
+          example: 500 Mg
+        harga:
+          type: string
+          example: Obat Price
+    ObatArray:
+      description: List of Obat objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Obat"
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        quantity:
+          type: string
+          example: 1 pcs
+        total_cost:
+          type: string
+          example: Rp 25000
+        status:
+          type: string
+          example: Pending
+    OrderArray:
+      description: List of Order objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Order"
