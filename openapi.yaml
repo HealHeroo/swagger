@@ -114,7 +114,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-   /signup_pengguna:
+   /signuppengguna:
     post:
       tags:
         - SignUp Pengguna
@@ -131,7 +131,7 @@ paths:
           description: Pengguna signed up successfully
         "400":
           description: Invalid input or Pengguna already exists
-  /signup_driver:
+  /signupdriver:
     post:
       tags:
         - SignUp Driver
