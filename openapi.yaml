@@ -5,7 +5,7 @@ info:
     Dokumen API Cloud Function Aplikasi Kesehatan HealHero
   termsOfService: https://github.com/HealHeroo/swagger
   contact:
-    email: juwitastefany13@gmail.com
+    url: https://healhero.my.id/proposal3/menu/biodata
   license:
     name: HealHero Package
     url: https://pkg.go.dev/github.com/HealHeroo/be_healhero
@@ -21,8 +21,18 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/HealHeroo/gcf_healhero/tree/main/login
+  - name: SignUp Pengguna
+    description: Regist Pengguna
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/signup_pengguna
+  - name: SignUp Driver
+    description: Regist Driver
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/signup_driver
   - name: User
-    description: Data User
+    description: Get Data User by Admin
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/HealHeroo/gcf_healhero/tree/main/user
@@ -46,6 +56,16 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/HealHeroo/gcf_healhero/tree/main/order
+  - name: Email
+    description: Change Email
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/email
+  - name: Password
+    description: Change Password
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/HealHeroo/gcf_healhero/tree/main/password
 paths:
   /login:
     post:
@@ -72,35 +92,72 @@ paths:
     get:
       tags:
         - User
-      summary: Get All User
+      summary: Get User By ID
       description: List Data User
-      operationId: getUserJSON
+      operationId: getUserByID
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+          description: ID of the User
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
+                  $ref: "#/components/schemas/UserData"
         "400":
           description: Invalid status value
       security:
         - token:
             - write:apiKey
             - read:apiKey
-  /pengguna/{penggunaId}:
+   /signup_pengguna:
+    post:
+      tags:
+        - SignUp Pengguna
+      summary: Signup Pengguna
+      description: Register a new Pengguna
+      operationId: signupPengguna
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupPenggunaRequest"
+      responses:
+        "201":
+          description: Pengguna signed up successfully
+        "400":
+          description: Invalid input or Pengguna already exists
+  /signup_driver:
+    post:
+      tags:
+        - SignUp Driver
+      summary: Signup Driver
+      description: Register a new Driver
+      operationId: signupDriver
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupDriverRequest"
+      responses:
+        "201":
+          description: Driver signed up successfully
+        "400":
+          description: Invalid input or Driver already exists
+  /pengguna:
     get:
       tags:
         - Pengguna
-      summary: Get Pengguna by ID
+      summary: Get Pengguna by ID oleh Admin
       description: Get a Pengguna by its ID
       operationId: getPenggunaById
       parameters:
         - name: penggunaId
-          in: path
-          required: true
+          in: query
           schema:
             type: string
           description: ID of the Pengguna
@@ -117,34 +174,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-    put:
-      tags:
-        - Pengguna
-      summary: Update Pengguna
-      description: Update an existing Pengguna
-      operationId: updatePengguna
-      parameters:
-        - name: penggunaId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Pengguna
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Pengguna"
-      responses:
-        "200":
-          description: Pengguna updated successfully
-        "404":
-          description: Pengguna not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /driver/{driverId}:
+  /driver:
     get:
       tags:
         - Driver
@@ -153,8 +183,7 @@ paths:
       operationId: getDriverById
       parameters:
         - name: driverId
-          in: path
-          required: true
+          in: query
           schema:
             type: string
           description: ID of the Driver
@@ -171,51 +200,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-    put:
-      tags:
-        - Driver
-      summary: Update Driver
-      description: Update an existing Driver
-      operationId: updateDriver
-      parameters:
-        - name: driverId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Driver
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Driver"
-      responses:
-        "200":
-          description: Driver updated successfully
-        "404":
-          description: Driver not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
   /obat:
-    get:
-      tags:
-        - Obat
-      summary: Get All Obat
-      description: List Data Obat
-      operationId: getAllObat
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ObatArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
     post:
       tags:
         - Obat
@@ -236,17 +221,15 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /obat/{obatId}:
     get:
       tags:
         - Obat
       summary: Get Obat by ID
-      description: Get a Obat by its ID
+      description: Get an Obat by its ID
       operationId: getObatById
       parameters:
         - name: obatId
-          in: path
-          required: true
+          in: query
           schema:
             type: string
           description: ID of the Obat
@@ -263,7 +246,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-    put:
+   put:
       tags:
         - Obat
       summary: Update Obat
@@ -271,7 +254,7 @@ paths:
       operationId: updateObat
       parameters:
         - name: obatId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -298,7 +281,7 @@ paths:
       operationId: deleteObat
       parameters:
         - name: obatId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -313,23 +296,6 @@ paths:
             - write:apiKey
             - read:apiKey
   /order:
-    get:
-      tags:
-        - Order
-      summary: Get All Order
-      description: List Data Order
-      operationId: getAllOrder
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
     post:
       tags:
         - Order
@@ -350,7 +316,6 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /order/{orderId}:
     get:
       tags:
         - Order
@@ -359,8 +324,7 @@ paths:
       operationId: getOrderById
       parameters:
         - name: orderId
-          in: path
-          required: true
+          in: query
           schema:
             type: string
           description: ID of the Order
@@ -385,7 +349,7 @@ paths:
       operationId: deleteOrder
       parameters:
         - name: orderId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -398,7 +362,7 @@ paths:
       security:
         - token:
             - write:apiKey
-            - read:apiKey
+            - read:apiKey  
 components:
   schemas:
     Login:
@@ -410,50 +374,6 @@ components:
         password:
           type: string
           example: secret
-    User:
-      type: object
-      properties:
-        _id:
-          type: string
-          example: 018272631
-        email:
-          type: string
-          example: admin@gmail.com
-        role:
-          type: string
-          example: admin
-    Pengguna:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        namalengkap:
-          type: string
-          example: Lisa Pink
-        tanggallahir:
-          type: string
-          example: 2023-11-07
-        jeniskelamin:
-          type: string
-          example: Perempuan
-        nomorhp:
-          type: string
-          example: 081274829374
-        alamat:
-          type: string
-          example: Jl. Mangga No 54
-        usersId:
-          type: string
-          example: 123456
-        email:
-          type: string
-          example: lisapink@gmail.com
-    PenggunaArray:
-      description: List of Pengguna objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Pengguna"
     AuthResponse:
       type: object
       properties:
@@ -466,6 +386,127 @@ components:
         token:
           type: string
           example: token
+        role:
+          type: string
+          example: admin
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 018272631
+        email:
+          type: string
+          example: admin@gmail.com
+        role:
+          type: string
+          example: admin
+    UserData:
+      type: object
+      properties:
+        data:
+          type: object
+        akun:
+          type: object
+          properties:
+            _id:
+              type: string
+              example: 018272631
+            email:
+              type: string
+              example: admin@gmail.com
+            role:
+              type: string
+              example: admin
+    SignupPenggunaRequest:
+      type: object
+      properties:
+        namalengkap:
+          type: string
+          example: Bella Swan
+        tanggallahir:
+          type: string
+          example: "1997-02-07"
+        jeniskelamin:
+          type: string
+          example: Female
+        nomorhp:
+          type: string
+          example: 123456789
+        alamat:
+          type: string
+          example: Jl Melati No.121
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: pengguna@example.com
+            password:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+      required:
+        - namalengkap
+        - tanggallahir
+        - jeniskelamin
+        - nomorhp
+        - alamat
+        - akun
+    SignupDriverRequest:
+      type: object
+      properties:
+        namalengkap:
+          type: string
+          example: Budi Setiawan
+        jeniskelamin:
+          type: string
+          example: Male
+        nomorhp:
+          type: string
+          example: 123456789
+        alamat:
+          type: string
+          example: Jl Perahu No.203
+        platmotor:
+          type: string
+          example: D 1203 TR
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: driver@example.com
+            password:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+      required:
+        - namalengkap
+        - jeniskelamin
+        - nomorhp
+        - alamat
+        - platmotor
+        - akun
+    Pengguna:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        namalengkap:
+          type: string
+          example: Lisa Pink
+        pelangganId:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: bella@example.com
     Driver:
       type: object
       properties:
@@ -474,19 +515,13 @@ components:
           example: 1
         namalengkap:
           type: string
-          example: Ade Candra Setiadi
-        jeniskelamin:
-          type: string
-          example: Laki Laki
-        nomorhp:
-          type: string
-          example: 081274836472
+          example: Driver Name
         alamat:
           type: string
-          example: Jl. Mawar No 56
-        platmotor:
+          example: Driver Address
+        email:
           type: string
-          example: D 1467 MOD
+          example: driver@example.com
     DriverArray:
       description: List of Driver objects
       type: array
@@ -500,16 +535,13 @@ components:
           example: 1
         nama_obat:
           type: string
-          example: Paracetamol
-        jenis_obat:
-          type: string
-          example: Analgesik
+          example: Obat Name
         keterangan:
           type: string
           example: 500 Mg
         harga:
           type: string
-          example: Rp 8.000
+          example: Obat Price
     ObatArray:
       description: List of Obat objects
       type: array
@@ -521,40 +553,17 @@ components:
         id:
           type: string
           example: 1
-        namobat:
-          type: string
-          example: Paracetamol
         quantity:
           type: string
-          example: 1
+          example: 1 pcs
         total_cost:
           type: string
-          example: Rp 8.000
+          example: Rp 25000
         status:
           type: string
-          example: Diantar
-    OrderArray:
+          example: Pending
+    ObatArray:
       description: List of Order objects
       type: array
       items:
         $ref: "#/components/schemas/Order"
-  requestBodies:
-    AuthReq:
-      description: Request Authentication
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Login"
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/AuthResponse"
-  securitySchemes:
-    token:
-      type: apiKey
-      name: Authorization
-      in: header
