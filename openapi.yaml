@@ -96,7 +96,7 @@ paths:
       description: List Data User
       operationId: getUserByID
       parameters:
-        - name: userId
+        - name: id
           in: query
           schema:
             type: string
@@ -156,7 +156,7 @@ paths:
       description: Get a Pengguna by its ID
       operationId: getPenggunaById
       parameters:
-        - name: penggunaId
+        - name: id
           in: query
           schema:
             type: string
@@ -182,7 +182,7 @@ paths:
       description: Get a Driver by its ID
       operationId: getDriverById
       parameters:
-        - name: driverId
+        - name: id
           in: query
           schema:
             type: string
@@ -228,7 +228,7 @@ paths:
       description: Get an Obat by its ID
       operationId: getObatById
       parameters:
-        - name: obatId
+        - name: id
           in: query
           schema:
             type: string
@@ -253,7 +253,7 @@ paths:
       description: Update an existing Obat
       operationId: updateObat
       parameters:
-        - name: obatId
+        - name: id
           in: query
           required: true
           schema:
@@ -280,7 +280,7 @@ paths:
       description: Delete a Obat by its ID
       operationId: deleteObat
       parameters:
-        - name: obatId
+        - name: id
           in: query
           required: true
           schema:
@@ -323,7 +323,7 @@ paths:
       description: Get a Order by its ID
       operationId: getOrderById
       parameters:
-        - name: orderId
+        - name: id
           in: query
           schema:
             type: string
@@ -348,7 +348,7 @@ paths:
       description: Delete a Order by its ID
       operationId: deleteOrder
       parameters:
-        - name: orderId
+        - name: id
           in: query
           required: true
           schema:
