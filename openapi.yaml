@@ -296,73 +296,73 @@ paths:
             - write: apiKey
             - read: apiKey
     /order:
-  post:
-    tags:
-      - Order
-    summary: Create Order
-    description: Create a new Order
-    operationId: createOrder
-    requestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Order"
-    responses:
-      "201":
-        description: Order created successfully
-      "400":
-        description: Invalid input
-    security:
-      - token:
-          - write:apiKey
-          - read:apiKey
-  get:
-    tags:
-      - Order
-    summary: Get Order by ID
-    description: Get a Order by its ID
-    operationId: getOrderById
-    parameters:
-      - name: id
-        in: query
-        schema:
-          type: string
-        description: ID of the Order
-    responses:
-      "200":
-        description: successful operation
+    post:
+      tags:
+        - Order
+      summary: Create Order
+      description: Create a new Order
+      operationId: createOrder
+      requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Order"
-      "404":
-        description: Order not found
-    security:
-      - token:
-          - write:apiKey
-          - read:apiKey
-  delete:
-    tags:
-      - Order
-    summary: Delete Order
-    description: Delete a Order by its ID
-    operationId: deleteOrder
-    parameters:
-      - name: id
-        in: query
-        required: true
-        schema:
-          type: string
-        description: ID of the Order
-    responses:
-      "204":
-        description: Order deleted successfully
-      "404":
-        description: Order not found
-    security:
-      - token:
-          - write:apiKey
-          - read:apiKey
+      responses:
+        "201":
+          description: Order created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    get:
+      tags:
+        - Order
+      summary: Get Order by ID
+      description: Get a Order by its ID
+      operationId: getOrderById
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+          description: ID of the Order
+      responses:
+        "200":
+          description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+        "404":
+          description: Order not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Order
+      summary: Delete Order
+      description: Delete a Order by its ID
+      operationId: deleteOrder
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of the Order
+      responses:
+        "204":
+          description: Order deleted successfully
+        "404":
+          description: Order not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     Login:
