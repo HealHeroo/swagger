@@ -1,6 +1,3 @@
-It looks like your OpenAPI specification has some formatting issues, especially with indentation. Additionally, there's a typo in the last part of your schema (`ObatArray` is defined twice, and the second one should probably be `OrderArray`). Below is the corrected and formatted version of your OpenAPI specification:
-
-```yaml
 openapi: 3.0.3
 info:
   title: Dokumen API Cloud Function - OpenAPI 3.0
