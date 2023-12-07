@@ -3,7 +3,7 @@ https://healheroo.github.io/swagger/
 
 # Swagger Documentation for HealHero API
 
-This repository contains the Swagger documentation for the HealHero API. HealHero is a project dedicated to [provide a brief description of the project or its purpose].
+Repositori ini berisi dokumentasi Swagger untuk HealHero API. HealHero adalah proyek yang didedikasikan untuk memberikan informasi kesehatan sederhana kepada pengguna.
 
 ## Table of Contents
 
@@ -16,7 +16,6 @@ This repository contains the Swagger documentation for the HealHero API. HealHer
   - [OpenAPI Specification](#openapi-specification)
   - [Generating Swagger Documentation](#generating-swagger-documentation)
   - [Viewing Swagger Documentation](#viewing-swagger-documentation)
-- [License](#license)
 
 ## Introduction
 
@@ -36,3 +35,6 @@ Before you begin, ensure you have the following installed:
 ```bash
 # Example
 npm install
+
+### Installation
+Clone this repository and install the dependencies.
