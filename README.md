@@ -1,9 +1,6 @@
-# swagger
-https://healheroo.github.io/swagger/
-
 # Swagger Documentation for HealHero API
 
-Repositori ini berisi dokumentasi Swagger untuk HealHero API. HealHero adalah proyek yang didedikasikan untuk memberikan informasi kesehatan sederhana kepada pengguna.
+Repositori ini berisi dokumentasi Swagger untuk HealHero API. HealHero adalah proyek yang didedikasikan untuk memberikan informasi tentang apa saja yang ada pada aplikasi.
 
 ## Table of Contents
 
@@ -14,12 +11,11 @@ Repositori ini berisi dokumentasi Swagger untuk HealHero API. HealHero adalah pr
 - [Swagger Documentation](#swagger-documentation)
   - [Swagger Function](#swagger-function)
   - [OpenAPI Specification](#openapi-specification)
-  - [Generating Swagger Documentation](#generating-swagger-documentation)
   - [Viewing Swagger Documentation](#viewing-swagger-documentation)
 
 ## Introduction
 
-HealHero is [provide a brief introduction to the project, its goals, and its significance].
+HealHero adalah proyek aplikasi kesehatan sederhana yang bertujuan memberikan informasi dan layanan berkaitan dengan kesehatan kepada pengguna. Aplikasi ini dirancang untuk memberikan kemudahan akses kepada pengguna terkait dengan informasi obat, pelayanan pengguna oleh admin, serta layanan pengiriman obat oleh driver. Aplikasi ini mencakup tiga peran utama: admin, pengguna/pelanggan, dan driver.
 
 ## Getting Started
 
@@ -47,7 +43,7 @@ npm install
 ## Swagger Documentation
 
 ### Swagger Function
-Konfigurasi untuk menggunakan Swagger UI, sebuah alat pengembangan web yang memungkinkan untuk menampilkan dan mengonsumsi dokumentasi OpenAPI (sebelumnya dikenal sebagai Swagger). 
+The swagger_function.js file in this repository serves the following purpose: 
 
 1. **`import SwaggerUIBundle from "https://cdn.skypack.dev/swagger-ui-dist/swagger-ui-bundle.js";`**
    - Mengimpor modul `SwaggerUIBundle` dari paket Skypack. Ini adalah bundel Swagger UI yang mencakup semua komponen yang diperlukan untuk menampilkan dokumentasi OpenAPI.
@@ -68,3 +64,37 @@ Konfigurasi untuk menggunakan Swagger UI, sebuah alat pengembangan web yang memu
 
 5. **`export function setSwagger() { return UIData; }`**
    - Mengekspor fungsi `setSwagger` yang mengembalikan data konfigurasi Swagger UI. 
+
+### OpenAPI Specification
+The openapi.yaml file contains the OpenAPI Specification for the HealHero API
+
+1. Info
+- **title:** Menyebutkan judul dokumentasi API.
+- **description:** Memberikan deskripsi umum tentang API HealHero.
+- **termsOfService:** Menyertakan URL ke halaman ketentuan layanan di GitHub.
+- **contact:** Menyertakan URL untuk menghubungi melalui formulir biodata di situs HealHero.
+- **license:** Menyertakan nama dan URL lisensi.
+- **version:** Menyebutkan versi API.
+
+2. ExternalDocs
+- **description:** Memberikan deskripsi tentang repositori GCF di GitHub.
+- **url:** Menyertakan URL ke repositori GCF di GitHub.
+
+3. Servers
+- Mendefinisikan server dengan URL dari cloud functions di Google Cloud Platform (GCP).
+
+4. Tags
+- Menyertakan beberapa tag yang mewakili fungsionalitas berbeda dari API, seperti Auth, SignUp, User, Pengguna, Driver, Obat, dan Order.
+
+5. Paths
+- Mendefinisikan operasi CRUD untuk setiap jalur API, seperti `/login`, `/signup_pengguna`, `/signup_driver`, `/user`, `/pengguna`, `/driver`, `/obat_healhero`, dan `/order_healhero`.
+
+6. Components
+- **schemas:** Mendefinisikan objek skema untuk entitas seperti Login, AuthResponse, User, Pengguna, Driver, Obat, dan Order.
+- **requestBodies:** Mendefinisikan body permintaan untuk beberapa operasi, seperti AuthReq dan UserArray.
+- **securitySchemes:** Mendefinisikan skema keamanan menggunakan API key di header Authorization.
+- **examples:** Menyertakan contoh untuk pembaruan profil Pengguna dan Driver.
+
+### Viewing Swagger Documentation
+Once the Swagger documentation is generated, you can view it by opening the following URL in your browser:
+Open the following URL in your browser: https://healheroo.github.io/swagger/
